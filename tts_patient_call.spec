@@ -6,8 +6,8 @@ a = Analysis(
     ['tts_patient_call.py'],
     pathex=[],
     binaries=[],
-    datas=[('version.txt', '.'), ('config.json', '.'), ('updater.py', '.')],
-    hiddenimports=['pymysql', 'gtts', 'playsound', 'requests'],
+    datas=[('version.txt', '.'), ('updater.py', '.')],
+    hiddenimports=['pymysql', 'playsound', 'gtts'],
     hookspath=[],
     runtime_hooks=[],
     excludes=[],
@@ -15,7 +15,9 @@ a = Analysis(
     win_private_assemblies=False,
     cipher=block_cipher,
 )
+
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+
 exe = EXE(
     pyz,
     a.scripts,
@@ -28,8 +30,14 @@ exe = EXE(
     upx=True,
     console=False,
 )
+
 coll = COLLECT(
-    exe, a.binaries, a.zipfiles, a.datas,
-    strip=False, upx=True,
+    exe,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
     name='tts_patient_call'
 )
